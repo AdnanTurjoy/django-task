@@ -18,13 +18,20 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.decorators.cache import never_cache
 from django.views.static import serve
-
+from product.views.product import ProductView,CreateVariantView
+from rest_framework import routers
 from config import settings
-
+from django.views.generic import TemplateView
+route = routers.DefaultRouter()
+route.register("",ProductView,basename='productView')
+route.register("",CreateVariantView,basename='variantView')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('authentication.urls')),
-    path('product/', include('product.urls'))
+    path('product/', include('product.urls')),
+    path('product/', include(route.urls)),
+    path('variant/', include(route.urls)),
+
 ]
 
 if settings.DEBUG:
