@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    "corsheaders",
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -44,7 +45,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -105,6 +107,21 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
+CORS_ALLOW_ALL_ORIGINS=True
+
+CORS_ORIGIN_WHITELIST = ('http://localhost:3000', 'http://localhost:3001')
+
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    'http://localhost:3001',
+    "http://localhost:3000",
+    "http://127.0.0.1:9000",
+]
+CORS_ORIGIN_WHITELIST = [
+'http://localhost:3000',
+'http://localhost:3001',
+'http://127.0.0.1:8000'
+]
 
 LANGUAGE_CODE = 'en-us'
 

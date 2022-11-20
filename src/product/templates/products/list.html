@@ -14,6 +14,7 @@
           name="title"
           placeholder="Product Title"
           class="form-control"
+          id="searchTitle"
         />
       </div>
       <div class="col-md-2">
@@ -52,7 +53,11 @@
         />
       </div>
       <div class="col-md-1">
-        <button type="submit" class="btn btn-primary float-right">
+        <button
+          type="submit"
+          class="btn btn-primary float-right"
+          id="btnSearch"
+        >
           <i class="fa fa-search"></i>
         </button>
       </div>
@@ -168,7 +173,23 @@
     // Setting innerHTML as tab variable
     document.getElementById("product").innerHTML = tab;
   }
-  fetch("http://127.0.0.1:8000/product/")
+  let titleSearch = "";
+  btnSearch.addEventListener("click", () => {
+    let titleSearch = document.getElementById("searchTitle").value;
+    if(titleSearch){
+      fetch(`http://127.0.0.1:8000/api/Product/?search=${titleSearch}`)
+      .then((res) => res.json())
+      .then((data) => show(data));
+    }
+    else{
+      fetch(`http://127.0.0.1:8000/api/Product/`)
+      .then((res) => res.json())
+      .then((data) => show(data));
+    }
+    
+  });
+
+  fetch(`http://127.0.0.1:8000/api/Product/?search=${titleSearch}`)
     .then((res) => res.json())
     .then((data) => show(data));
   show(data);

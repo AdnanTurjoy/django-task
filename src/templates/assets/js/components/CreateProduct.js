@@ -84,7 +84,7 @@ const CreateProduct = (props) => {
   }
 
   // Save product
-  let saveProduct = async (event) => {
+  const saveProduct = async (event) => {
     event.preventDefault();
     // TODO : write your code here to save the product
 
@@ -95,7 +95,7 @@ const CreateProduct = (props) => {
 
     await axios({
       method: "post",
-      url: "http://127.0.0.1:8000/product/",
+      url: "http://127.0.0.1:8000/api/Product/",
       data: formField,
     }).then((response) => {
       console.log(response.data);

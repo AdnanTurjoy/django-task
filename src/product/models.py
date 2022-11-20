@@ -8,6 +8,8 @@ class Variant(TimeStampMixin):
     description = models.TextField()
     active = models.BooleanField(default=True)
     
+    def __str__(self):
+        return self.title
 
 class Product(TimeStampMixin):
     title = models.CharField(max_length=255)
@@ -21,11 +23,15 @@ class ProductImage(TimeStampMixin):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     file_path = models.URLField()
 
+    def __str__(self):
+        return self.file_path
+
 # need to update
 class ProductVariant(TimeStampMixin):
     variant_title = models.CharField(max_length=255)
     variant = models.ForeignKey(Variant, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, related_name='product', on_delete=models.CASCADE)
+    price = models.IntegerField(default=0)
     
     def __str__(self):
         return self.variant_title

@@ -1,5 +1,10 @@
 from rest_framework import serializers
-from .models import Product,ProductVariant
+from .models import Product,ProductVariant,Variant,ProductImage
+
+class TotalVariantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Variant
+        fields='__all__'
 
 class VariantSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,3 +18,7 @@ class ProductSerializer(serializers.ModelSerializer):
         model= Product
         fields='__all__'
 
+class ProductImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= ProductImage
+        fields='__all__'

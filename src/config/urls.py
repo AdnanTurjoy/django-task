@@ -18,19 +18,21 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.decorators.cache import never_cache
 from django.views.static import serve
-from product.views.product import ProductView,CreateVariantView
+from product.views.product import ProductView,CreateVariantView,VariantView,ProductImageView
 from rest_framework import routers
 from config import settings
 from django.views.generic import TemplateView
 route = routers.DefaultRouter()
-route.register("",ProductView,basename='productView')
-route.register("",CreateVariantView,basename='variantView')
+route.register("api/Product",ProductView,basename='productView')
+route.register("api/ProductVariant",CreateVariantView,basename='variantView')
+route.register("api/Variant",VariantView,basename='totalVariantView')    
+route.register("api/ProductImage",ProductImageView,basename='ProductImageView')  
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('authentication.urls')),
     path('product/', include('product.urls')),
     path('product/', include(route.urls)),
-    path('variant/', include(route.urls)),
+    path('', include(route.urls)),
 
 ]
 
